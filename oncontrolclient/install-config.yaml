@@ -1,0 +1,48 @@
+apiVersion: v1
+baseDomain: lo
+compute:
+- hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 3
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: gw
+networking:
+  clusterNetworks:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  #machineCIDR: 10.0.0.0/16
+  #networkType: OpenShiftSDN
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+additionalTrustBundle: |
+  -----BEGIN CERTIFICATE-----
+  MIIDTzCCAjegAwIBAgIUYgFxId6TVBwu9oPrUYCVXIasfqAwDQYJKoZIhvcNAQEL
+  ........exampleuRpSJEKxS5vjZlQr8L2lRvmtrcAuSrXyrl2WPAYaqDWfKeRDE
+  XqfHb0vRmm7zYc4y1wGH9vhFLJaDsGLwptMo6LR2qzL7qwM=
+  -----END CERTIFICATE-----
+  -----BEGIN CERTIFICATE-----
+  MIIDsTCCApmgAwIBAgIUBLvcvfU4pQhvlpbTGL4UAJr7m8gwDQYJKoZIhvcNAQEL
+  .........exampleBhMCVVMxCzAJBgNVBAgMAlZBMREwDwYDVQQHDAhOZXcgWW9y
+  Mv4C2SYyrlApuG1RwusJ3A0PEwOmQcxmBRRj5XdsR3ONv7KonA==
+  -----END CERTIFICATE-----
+imageContentSources:
+- mirrors:
+  - registry.gw.lo:8443/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-release
+- mirrors:
+  - registry.gw.lo:8443/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+platform:
+  none: {}
+fips: false
+pullSecret: '{"auths":{"registry.gw.lo:8443": {"auth": "aW5pdDpUczNGexampleiVVkwxxxxxxxxxxxxxxxxxxxxxVhXNQ=="}
+sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQAexampleqtl/aQ5kdjpRqlmC2spJ9WZinsqbb6HhZ1i8Yd2ZycDQZF+S8n1n gwest@Glenns-MacBook-Pro.local
+
